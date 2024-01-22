@@ -9,7 +9,15 @@ import morgan from "morgan";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import {register} from "./controller/auth.js";
+import {createPost} from "./controller/posts.js";
 import authRoute from "./routes/auth.js";
+import userRoute from "./routes/users.js";
+import postRoute from "./routes/post.js";
+import { verifyToken } from "./middlewares/verify.js";
+import User from "./models/user.js";
+import Post from "./models/post.js"; 
+import {users,posts} from "./data/index.js"
+
 
 /*CONFIGURATION */
 
@@ -40,11 +48,13 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 /* ROUTES WITH FILE */
-app.post("/auth/register",upload.single('picture'),register)
+app.post("/auth/register",upload.single("picture"),register);
+app.post("/posts",verifyToken,upload.single("picture"),createPost);
 
 /* ROUTES */
-app.use("/auth",authRoute)
-
+app.use("/auth",authRoute);
+app.use("/users",userRoute);
+app.use("/posts",postRoute);
 
 
 /* MONGODB CONNECTION */
@@ -53,12 +63,15 @@ mongoose.connect(process.env.MONGO_LOCAL_URL,{
 // useNewUrlParse :true,
 // useUnifiedTopology : true
 }).then(()=>{
-    console.log('DB Connection successfull')
+    console.log('DB Connection successfull');
+    app.listen(process.env.PORT,()=>{
+        console.log(`server connected on Port ${PORT}`)
+    })
+
+/* ADD DATA ONE TIME */
+// User.insertMany(users);
+// Post.insertMany(posts);
+
 }).catch((err)=>{
     console.log(err.message) 
-})
-
-
-app.listen(process.env.PORT,()=>{
-    console.log(`server connected on Port ${PORT}`)
-})
+});
