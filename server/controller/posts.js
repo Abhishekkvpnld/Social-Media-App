@@ -33,6 +33,7 @@ res.status(201).json(post)
 /* READ */
 export const getFeedPost = async(req,res)=>{
 try{
+    console.log('getFeedPost');
 const post = await Post.find();
 res.status(200).json(post);
 }catch(err){
@@ -42,6 +43,7 @@ res.status(200).json(post);
 
 export const getUserPost = async(req,res)=>{
 try{
+    console.log("getUserPost")
 const {userId} = req.params;
 const post = await Post.findOne({ userId });
 res.status(200).json(post)

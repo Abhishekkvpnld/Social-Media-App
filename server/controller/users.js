@@ -3,7 +3,6 @@ import User from "../models/user.js";
 /* READ */
 export const getUser = async(req,res)=>{
 try{
-
 let {id} = req.params;
 const user = await User.findById(id)
 res.status(200).json(user);
@@ -28,6 +27,7 @@ const friends = await Promise.all(
         return {_id,firstName,lastName,occupation,location,picturePath};
     }
     )
+    console.log(formattedFriends+'fskjdfsfsfk');
 res.status(200).json(formattedFriends);
 
 }catch(err){
