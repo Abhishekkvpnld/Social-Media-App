@@ -27,7 +27,6 @@ const friends = await Promise.all(
         return {_id,firstName,lastName,occupation,location,picturePath};
     }
     )
-    console.log(formattedFriends+'fskjdfsfsfk');
 res.status(200).json(formattedFriends);
 
 }catch(err){

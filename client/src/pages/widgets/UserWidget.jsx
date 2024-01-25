@@ -27,7 +27,6 @@ import {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-     console.log(data)
       setUser(data);
     };
   
@@ -44,7 +43,7 @@ import {
       lastName,
       location,
       occupation,
-      viewedProfile,
+      viewesProfile,
       impressions,
       friends,
     } = user;
@@ -100,7 +99,7 @@ import {
           <FlexBetween mb="0.5rem">
             <Typography color={medium}>Who's viewed your profile</Typography>
             <Typography color={main} fontWeight="500">
-              {viewedProfile}
+              {viewesProfile}
             </Typography>
           </FlexBetween>
           <FlexBetween>
