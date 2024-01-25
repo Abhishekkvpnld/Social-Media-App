@@ -3,12 +3,12 @@ import JWT from 'jsonwebtoken';
 export const verifyToken = (req,res,next)=>{
 try{
 
-let token = req.header("Autherization");
+let token = req.header("Authorization");
 if(!token){
     return res.status(403).json({msg:"Aceess Denied"})
 }
 
-if(token.startWith("Bearer ")){
+if(token.startsWith("Bearer ")){
 token = token.slice(7,token.length).trimLeft();
 }
 

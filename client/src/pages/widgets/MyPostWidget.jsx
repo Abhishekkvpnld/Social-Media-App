@@ -17,10 +17,10 @@ import {
     IconButton,
     useMediaQuery,
   } from "@mui/material";
-  import FlexBetween from "components/FlexBetween";
+  import FlexBetween from "../../components/FlexBetween";
   import Dropzone from "react-dropzone";
-  import UserImage from "components/UserImage";
-  import WidgetWrapper from "components/WidgetWrapper";
+  import UserImage from "../../components/UserImage";
+  import WidgetWrapper from "../../components/WidgetWrapper";
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "../../states/state";
@@ -135,17 +135,23 @@ import {
             <>
               <FlexBetween gap="0.25rem">
                 <GifBoxOutlined sx={{ color: mediumMain }} />
-                <Typography color={mediumMain}>Clip</Typography>
+                <Typography color={mediumMain}>
+                  Clip
+                </Typography>
               </FlexBetween>
   
               <FlexBetween gap="0.25rem">
                 <AttachFileOutlined sx={{ color: mediumMain }} />
-                <Typography color={mediumMain}>Attachment</Typography>
+                <Typography color={mediumMain}> 
+                Attachment
+                </Typography>
               </FlexBetween>
   
               <FlexBetween gap="0.25rem">
                 <MicOutlined sx={{ color: mediumMain }} />
-                <Typography color={mediumMain}>Audio</Typography>
+                <Typography color={mediumMain}>
+                  Audio
+                  </Typography>
               </FlexBetween>
             </>
           ) : (

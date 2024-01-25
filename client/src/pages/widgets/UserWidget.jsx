@@ -5,9 +5,9 @@ import {
     WorkOutlineOutlined,
   } from "@mui/icons-material";
   import { Box, Typography, Divider, useTheme } from "@mui/material";
-  import UserImage from "components/UserImage";
-  import FlexBetween from "components/FlexBetween";
-  import WidgetWrapper from "components/WidgetWrapper";
+  import UserImage from "../../components/UserImage";
+  import FlexBetween from "../../components/FlexBetween";
+  import WidgetWrapper from "../../components/WidgetWrapper";
   import { useSelector } from "react-redux";
   import { useEffect, useState } from "react";
   import { useNavigate } from "react-router-dom";
@@ -27,12 +27,13 @@ import {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
+     console.log(data)
       setUser(data);
     };
   
     useEffect(() => {
       getUser();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
   
     if (!user) {
       return null;
