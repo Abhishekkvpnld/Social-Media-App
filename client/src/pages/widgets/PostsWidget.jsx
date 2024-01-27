@@ -5,10 +5,10 @@ import PostWidget from "./PostWidget";
 
 
 const PostsWidget = ({ userId, isProfile = false }) => {
+
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
-console.log(posts)
   const getPosts = async () => {
     const response = await fetch("http://localhost:4000/posts", {
       method: "GET",
@@ -40,6 +40,7 @@ console.log(posts)
 
   return (
     <>
+    {console.log(posts)}
       {posts.map(
         ({
           _id,
