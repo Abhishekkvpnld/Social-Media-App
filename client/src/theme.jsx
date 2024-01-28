@@ -27,6 +27,9 @@ export const colorTokens = {
       800: "#00353F",
       900: "#001519",
     },
+    red:{
+      100:"#FF0000"
+    }
   };
   
   // mui theme settings
@@ -52,6 +55,8 @@ export const colorTokens = {
               background: {
                 default: colorTokens.grey[900],
                 alt: colorTokens.grey[800],
+                like:colorTokens.red[100]
+                
               },
             }
           : {
@@ -71,6 +76,7 @@ export const colorTokens = {
               background: {
                 default: colorTokens.grey[10],
                 alt: colorTokens.grey[0],
+                like:colorTokens.red[100]
               },
             }),
       },

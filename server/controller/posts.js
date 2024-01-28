@@ -14,7 +14,7 @@ const newPost = new Post(
         lastName:user.lastName,
         location:user.location,
         description,
-        userPicturePath:user.userPicturePath,
+        userPicturePath:user.picturePath,
         picturePath,
         likes:{},
         comments:[]
@@ -42,11 +42,12 @@ res.status(200).json(post);
 }
 }
 
-export const getUserPost = async(req,res)=>{
+export const getUserPost = async(req,res)=>{////////////////////////////////////////////
 try{
     console.log("getUserPost")
 const {userId} = req.params;
-const post = await Post.findOne({ userId });
+console.log(userId);
+const post = await Post.findById({ userId });
 res.status(200).json(post)
 }catch(err){
     res.status(404).json({message:err.message});
@@ -59,7 +60,7 @@ try{
 
 const {id} = req.params;
 const {userId} = req.body;
-const {post} = await Post.findById(id);
+const post = await Post.findById(id);
 const isLiked = await post.likes.get(userId);
 
 if(isLiked){

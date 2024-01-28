@@ -60,7 +60,7 @@ import {
             <UserImage image={picturePath} />
             <Box>
               <Typography
-                variant="h4"
+                variant="h5"
                 color={dark}
                 fontWeight="500"
                 sx={{
