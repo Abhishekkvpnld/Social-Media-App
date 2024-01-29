@@ -35,7 +35,6 @@ export const getFeedPost = async(req,res)=>{
 try{
     console.log('getFeedPost');
 const post = await Post.find();
-console.log(post)
 res.status(200).json(post);
 }catch(err){
     res.status(404).json({message:err.message});
@@ -45,10 +44,9 @@ res.status(200).json(post);
 export const getUserPost = async(req,res)=>{////////////////////////////////////////////
 try{
     console.log("getUserPost")
-const {userId} = req.params;
-console.log(userId);
-const post = await Post.findById({ userId });
-res.status(200).json(post)
+    const { userId } = req.params;
+    const post = await Post.find({ userId });
+    res.status(200).json(post);
 }catch(err){
     res.status(404).json({message:err.message});
 }

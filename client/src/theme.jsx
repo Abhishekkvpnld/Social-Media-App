@@ -29,6 +29,15 @@ export const colorTokens = {
     },
     red:{
       100:"#FF0000"
+    },
+    green:{
+      100:"#00FF00",
+      200:"#fffff",
+      300:"	#6495ED"
+    },
+    black:{
+      100:"#000000",
+      200:"#fffff"
     }
   };
   
@@ -44,6 +53,9 @@ export const colorTokens = {
                 dark: colorTokens.primary[200],
                 main: colorTokens.primary[500],
                 light: colorTokens.primary[800],
+                green:colorTokens.green[200],
+                black:colorTokens.black[200],
+
               },
               neutral: {
                 dark: colorTokens.grey[100],
@@ -51,12 +63,16 @@ export const colorTokens = {
                 mediumMain: colorTokens.grey[300],
                 medium: colorTokens.grey[400],
                 light: colorTokens.grey[700],
+                green:colorTokens.green[200],
+                black:colorTokens.black[200]
               },
               background: {
                 default: colorTokens.grey[900],
                 alt: colorTokens.grey[800],
-                like:colorTokens.red[100]
-                
+                like:colorTokens.red[100],
+                green:colorTokens.green[300],
+                black:colorTokens.black[200],
+                red:colorTokens.red[100]
               },
             }
           : {
@@ -65,6 +81,8 @@ export const colorTokens = {
                 dark: colorTokens.primary[700],
                 main: colorTokens.primary[500],
                 light: colorTokens.primary[50],
+                green:colorTokens.green[100],
+                black:colorTokens.black[100]
               },
               neutral: {
                 dark: colorTokens.grey[700],
@@ -72,11 +90,15 @@ export const colorTokens = {
                 mediumMain: colorTokens.grey[400],
                 medium: colorTokens.grey[300],
                 light: colorTokens.grey[50],
+                green:colorTokens.green[100],
+                black:colorTokens.black[100]
               },
               background: {
                 default: colorTokens.grey[10],
                 alt: colorTokens.grey[0],
-                like:colorTokens.red[100]
+                like:colorTokens.red[100],
+                green:colorTokens.green[100],
+                black:colorTokens.black[100]
               },
             }),
       },
