@@ -33,7 +33,8 @@ export const colorTokens = {
     green:{
       100:"#00FF00",
       200:"#fffff",
-      300:"	#6495ED"
+      300:"	#6495ED",
+     
     },
     black:{
       100:"#000000",
