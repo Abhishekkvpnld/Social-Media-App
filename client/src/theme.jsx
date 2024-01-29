@@ -54,7 +54,7 @@ export const colorTokens = {
                 main: colorTokens.primary[500],
                 light: colorTokens.primary[800],
                 green:colorTokens.green[200],
-                black:colorTokens.black[200],
+                black:colorTokens.black[100],
 
               },
               neutral: {
@@ -63,15 +63,15 @@ export const colorTokens = {
                 mediumMain: colorTokens.grey[300],
                 medium: colorTokens.grey[400],
                 light: colorTokens.grey[700],
-                green:colorTokens.green[200],
-                black:colorTokens.black[200]
+                green:colorTokens.green[300],
+                black:colorTokens.black[100]
               },
               background: {
                 default: colorTokens.grey[900],
                 alt: colorTokens.grey[800],
                 like:colorTokens.red[100],
                 green:colorTokens.green[300],
-                black:colorTokens.black[200],
+                black:colorTokens.black[100],
                 red:colorTokens.red[100]
               },
             }

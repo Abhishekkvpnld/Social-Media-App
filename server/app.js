@@ -59,9 +59,9 @@ app.use("/posts",postRoute);
 
 /* MONGODB CONNECTION */
 const PORT = process.env.PORT || 4000
-mongoose.connect(process.env.MONGO_LOCAL_URL,{
+mongoose.connect(process.env.MONGO_LOCAL_URL,{  
 // useNewUrlParse :true,
-// useUnifiedTopology : true
+// useUnifiedTopology : true 
 }).then(()=>{
     console.log('DB Connection successfull');
     app.listen(process.env.PORT,()=>{
