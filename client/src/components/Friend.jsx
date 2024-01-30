@@ -23,7 +23,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:4000/users/${_id}/${friendId}`,
+      `https://shareburst.onrender.com/users/${_id}/${friendId}`,
       {
         method: "PUT",
         headers: {
