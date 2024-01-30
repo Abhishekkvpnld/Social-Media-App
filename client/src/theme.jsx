@@ -26,6 +26,7 @@ export const colorTokens = {
       700: "#006B7D",
       800: "#00353F",
       900: "#001519",
+      1000:"#FF0000"
     },
     red:{
       100:"#FF0000"
@@ -56,6 +57,7 @@ export const colorTokens = {
                 light: colorTokens.primary[800],
                 green:colorTokens.green[200],
                 black:colorTokens.black[100],
+                red:colorTokens.red[100]
 
               },
               neutral: {
@@ -83,7 +85,8 @@ export const colorTokens = {
                 main: colorTokens.primary[500],
                 light: colorTokens.primary[50],
                 green:colorTokens.green[100],
-                black:colorTokens.black[100]
+                black:colorTokens.black[100],
+                red:colorTokens.red[100]
               },
               neutral: {
                 dark: colorTokens.grey[700],
