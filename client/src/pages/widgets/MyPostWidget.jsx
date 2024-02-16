@@ -24,6 +24,7 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "../../states/state";
+import Status from "./Status";
   
   const MyPostWidget = ({ picturePath }) => {
     const dispatch = useDispatch();
@@ -59,6 +60,7 @@ import {
   
     return (
       <WidgetWrapper>
+
         <FlexBetween gap="1.5rem">
           <UserImage image={picturePath} />
           <InputBase
@@ -172,6 +174,7 @@ import {
             POST
           </Button>
         </FlexBetween>
+        
       </WidgetWrapper>
     );
   };

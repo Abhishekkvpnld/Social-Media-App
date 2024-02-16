@@ -13,6 +13,7 @@ import {createPost} from "./controller/posts.js";
 import authRoute from "./routes/auth.js";
 import userRoute from "./routes/users.js";
 import postRoute from "./routes/post.js";
+import statusRoute from "./routes/status.js";
 import { verifyToken } from "./middlewares/verify.js";
 import User from "./models/user.js";
 import Post from "./models/post.js"; 
@@ -55,6 +56,7 @@ app.post("/posts",verifyToken,upload.single("picture"),createPost);
 app.use("/auth",authRoute);
 app.use("/users",userRoute);
 app.use("/posts",postRoute);
+app.use("/status",statusRoute);
 
 
 /* MONGODB CONNECTION */
