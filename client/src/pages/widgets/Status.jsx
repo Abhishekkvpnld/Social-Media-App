@@ -1,7 +1,8 @@
-import { Box } from '@mui/material'
-import React,{useEffect, useState} from 'react'
+import { Box} from '@mui/material'
+import React,{useState} from 'react'
 import status from './png-clipart-swagger-application-programming-interface-representational-state-transfer-openapi-specification-logo-whatsapp-status-cartoon-logo-grass-thumbnail.png' 
 import FlexBetween from 'components/FlexBetween';
+import friendStatus from "./vector-flat-illustration-grayscale-avatar-600nw-2281862025.webp"
 import convertToBase64  from "../../components/Convert";
 import {useSelector } from "react-redux";
 
@@ -13,19 +14,16 @@ import {useSelector } from "react-redux";
   const [file,setFile] = useState('');
 
 
- useEffect(()=>{
-
+/* Backend connections */
 const userStatus = async ()=>{
-    
-    const response = await fetch(`https://shareburst.onrender.com/status/${userId}`, {
+    alert(file)
+    const data = {userId,file}
+    const response = await fetch(`http://localhost:4000/status/${data}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await response.json();
-    console.log('status******',data)
+  
   }
-
-  },[token,userId])
 
     
 
@@ -34,6 +32,7 @@ const userStatus = async ()=>{
     try {
       const base64 = await convertToBase64(e.target.files[0]);
       setFile(base64);
+      await userStatus();
     } catch (error) {
       console.error('Error converting file to base64:', error);
     }
@@ -60,16 +59,14 @@ const userStatus = async ()=>{
 <Box margin='5px'>
   
 <h3 >status</h3>
-<form>
   <label htmlFor="status">
 
     <img
     id='statusImg'
-    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green"}}
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green", margin:"2px"}}
     width="60px"
     height='60px'
     alt="status"
-    // src={`https://media.istockphoto.com/id/639695818/photo/photographer-workplace.jpg?s=1024x1024&w=is&k=20&c=3puvOnZJWmuXv_5L76LLroWemCqVvZ-5_Oux_xvEa7w=`}
     src={file ? file : status}
     title='Add status'
     />
@@ -77,7 +74,57 @@ const userStatus = async ()=>{
     </label>
     <input onChange={onUpload} type="file" id='status' name='status' style={{display:'none'}} />
 
-    </form>
+    <img
+    id='statusImg'
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green" , padding:"1px", margin:"2px"}}
+    width="60px"
+    height='60px'
+    alt="status"
+    src={friendStatus}
+    title='Add status'
+    />
+
+<img
+    id='statusImg'
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green",padding:"1px", margin:"2px"}}
+    width="60px"
+    height='60px'
+    alt="status"
+    src={friendStatus}
+    title='Add status'
+    />
+
+<img
+    id='statusImg'
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green",padding:"1px", margin:"2px"}}
+    width="60px"
+    height='60px'
+    alt="status"
+    src={friendStatus}
+    title='Add status'
+    />
+
+<img
+    id='statusImg'
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green",padding:"1px", margin:"2px"}}
+    width="60px"
+    height='60px'
+    alt="status"
+    src={friendStatus}
+    title='Add status'
+    />
+
+<img
+    id='statusImg'
+    style={{ objectFit: "cover", borderRadius: "50%" ,border:"3px dashed green",padding:"1px", margin:"2px"}}
+    width="60px"
+    height='60px'
+    alt="status"
+    src={friendStatus}
+    title='Add status'
+    />
+
+
 </Box>
 
     </FlexBetween>

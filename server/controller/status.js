@@ -1,7 +1,11 @@
+
 export const userStatus = (req,res)=>{
     try{
-console.log(req.body,'*****userID*****',userId)
+
+console.log(req.params)
+
     }catch(err){
+
         res.status({message:err})
     }
 }
