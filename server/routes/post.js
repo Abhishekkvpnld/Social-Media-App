@@ -11,4 +11,4 @@ router.get("/:userId/posts",getUserPost);
 /* UPDATE */
 router.put("/:id/like",likePost);
 
-export default router;
+export default router; 
