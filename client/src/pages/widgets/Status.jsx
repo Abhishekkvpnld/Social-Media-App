@@ -13,7 +13,7 @@ function Status({ userId }) {
   const token = useSelector((state) => state.token);
   const [file, setFile] = useState('');
   const [userData, setUserData] = useState({})
-
+const [friendData,setFriendData] = useState([])
 
 
 
@@ -39,15 +39,17 @@ await friendStatus();
 
 
  const friendStatus = async()=>{
-  const response = await fetch(`http://localhost:4000/status/friendStatus`, {
+  const response = await fetch(`http://localhost:4000/status/friendStatus/${userData.friends}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      // body: JSON.stringify(userData),
     });
-    // const data = await response.json();
+    const data = await response.json();
+  console.log(data);
+  setFriendData(data)
  }
 
 
@@ -69,60 +71,6 @@ await friendStatus();
     <FlexBetween>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* <Box>
-
-              <img src={userData.status}
-
-               alt="status"
-                className="status" 
-                style={{ objectFit: "cover", borderRadius: "50%" }}
-                width="60px"
-                height='60px'
-                title='status'
-               
-              />
-
-              
-
-</Box> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <Box margin='5px'>
 
         <h3 >status</h3>
@@ -130,7 +78,7 @@ await friendStatus();
 
           <img
             id='statusImg'
-            style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", margin: "2px" }}
+            style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", margin: "2px",padding:"1px" }}
             width="60px"
             height='60px'
             alt="status"
@@ -141,56 +89,76 @@ await friendStatus();
         </label>
         <input onChange={onUpload} type="file" id='status' name='status' style={{ display: 'none' }} />
 
-        <img
-          id='statusImg'
-          style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
-          width="60px"
-          height='60px'
-          alt="status"
-          src={friendStatusImg}
-          title='status'
-        />
 
-        <img
-          id='statusImg'
-          style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
-          width="60px"
-          height='60px'
-          alt="status"
-          src={friendStatusImg}
-          title='status'
-        />
+{friendData ? 
+          friendData?.map((friend, index) => (
+            <img
+              key={index}
+              id='statusImg'
+              style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+              width="60px"
+              height='60px'
+              alt="status"
+              src={friendStatusImg}
+              title='status'
+            />
+          ))
+        
 
+        :
+      <>
+        
         <img
-          id='statusImg'
-          style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
-          width="60px"
-          height='60px'
-          alt="status"
-          src={friendStatusImg}
-          title='status'
-        />
+        id='statusImg'
+        style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+        width="60px"
+        height='60px'
+        alt="status"
+        src={friendStatusImg}
+        title='status'
+      />
 
-        <img
-          id='statusImg'
-          style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
-          width="60px"
-          height='60px'
-          alt="status"
-          src={friendStatusImg}
-          title='status'
-        />
+      <img
+        id='statusImg'
+        style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+        width="60px"
+        height='60px'
+        alt="status"
+        src={friendStatusImg}
+        title='status'
+      />
 
-        <img
-          id='statusImg'
-          style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
-          width="60px"
-          height='60px'
-          alt="status"
-          src={friendStatusImg}
-          title='status'
-        />
+      <img
+        id='statusImg'
+        style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+        width="60px"
+        height='60px'
+        alt="status"
+        src={friendStatusImg}
+        title='status'
+      />
 
+      <img
+        id='statusImg'
+        style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+        width="60px"
+        height='60px'
+        alt="status"
+        src={friendStatusImg}
+        title='status'
+      />
+
+      <img
+        id='statusImg'
+        style={{ objectFit: "cover", borderRadius: "50%", border: "3px dashed green", padding: "1px", margin: "2px" }}
+        width="60px"
+        height='60px'
+        alt="status"
+        src={friendStatusImg}
+        title='status'
+      />
+</>
+}
 
       </Box>
 

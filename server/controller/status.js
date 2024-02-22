@@ -20,12 +20,24 @@ export const userStatus = async (req, res) => {
 };
 
 
+
 export const firendStatus = async(req,res)=>{
 try{
-    const friends = req.body;
+    // const friends = req.body;
+    const friends = ['65b7cc54eeff5881ea2d15da', '65b7cc54eeff5881ea2d15dd', '65b7cc54eeff5881ea2d15df'];
 console.log(friends);
 
-}catch(err){
-    res.status(404).json({ message: 'Internal server error' })
+const friendData = await Promise.all(friends.map(async (friend) => {
+    if (friend) {
+        const fetchData = await User.findById(friend);
+        return fetchData;
+    }
+}));
+// console.log(friendData);
+res.status(200).json(friendData.filter(Boolean)); // Filter out any null or undefined values
+
+} catch (err) {
+    console.error('Error fetching friend data:', err);
+    res.status(500).json({ message: 'Internal server error' });
 }
 }
