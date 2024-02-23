@@ -7,6 +7,7 @@ const router = express.Router();
 /** POST**/
 router.post('/:userId',verifyToken,userStatus);
 
-router.post('/friendStatus/:userFriends',verifyToken,firendStatus)
+/** GET **/
+router.get('/friendStatus/:userId',verifyToken,firendStatus)
 
 export default router;

@@ -41,7 +41,7 @@ res.status(200).json(post);
 }
 }
 
-export const getUserPost = async(req,res)=>{////////////////////////////////////////////
+export const getUserPost = async(req,res)=>{
 try{
     console.log("getUserPost")
     const { userId } = req.params;

@@ -72,6 +72,7 @@ import {
               backgroundColor: palette.neutral.light,
               borderRadius: "2rem",
               padding: "1rem 2rem",
+              zIndex:-1
             }}
           />
         </FlexBetween>
@@ -169,6 +170,7 @@ import {
               color:palette.background.black,
               backgroundColor: palette.background.green,
               borderRadius: "3rem",
+              zIndex:-1
             }}
           >
             POST
