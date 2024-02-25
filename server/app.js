@@ -61,7 +61,7 @@ app.use("/status",statusRoute);
 
 /* MONGODB CONNECTION */
 const PORT = process.env.PORT || 4000
-mongoose.connect(process.env.MONGO_LOCAL_URL,{  
+mongoose.connect(process.env.MONGO_ATLAS_URL,{  
 // useNewUrlParse :true,
 // useUnifiedTopology : true 
 }).then(()=>{

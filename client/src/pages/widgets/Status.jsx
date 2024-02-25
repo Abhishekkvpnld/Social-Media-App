@@ -7,41 +7,64 @@ import friendStatusImg from "./vector-flat-illustration-grayscale-avatar-600nw-2
 import cancelIcon from "./icons8-cancel.svg"
 import convertToBase64 from "../../components/Convert";
 import { useSelector } from "react-redux";
+import axios from 'axios';
 
 
 function Status({ userId }) {
 
   const token = useSelector((state) => state.token);
   const [file, setFile] = useState('');
-  const [userData, setUserData] = useState({})
-const [friendData,setFriendData] = useState([])
-const [viewStatus,setViewStatus] = useState('')
-const [friendStatusImage,setFriendStatusImage] = useState('')
+  const [userData, setUserData] = useState({});
+const [friendData,setFriendData] = useState([]);
+const [viewStatus,setViewStatus] = useState('');
+const [friendStatusImage,setFriendStatusImage] = useState('');
+const [imageUrl,setImageUrl] = useState("")
 
 
 
 useEffect(()=>{
 userStatus();
+friendStatus();
 },[]);// eslint-disable-line react-hooks/exhaustive-deps
 
   /* Backend connection */
-  const userStatus = async (base64File) => {
-    const response = await fetch(`http://localhost:4000/status/${userId}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({base64File}),
-    });
-    const data = await response.json();
-    // alert([data.friends]);
-    setUserData(data);
-await friendStatus(data.friends.toString()
-  );
+  const userStatus = async () => {
+   
+console.log(imageUrl)
+    if(imageUrl){
+
+      const requestBody = {
+        base64Data: imageUrl
+      };
+      
+      const response = await fetch(`http://localhost:4000/status/${userId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json" // Specify JSON content type
+        },
+        body: JSON.stringify(requestBody) // Convert the request data to JSON string
+      });
+      const data = await response.json();
+      setUserData(data);
+    }else{
+
+      const response = await fetch(`http://localhost:4000/status/${userId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const data = await response.json();
+      setUserData(data);
+    }
+    
   }
 
- const friendStatus = async(friends)=>{
+
+
+
+ const friendStatus = async()=>{
   const response = await fetch(`http://localhost:4000/status/friendStatus/${userId}`, {
       method: "GET",
       headers: {
@@ -49,8 +72,7 @@ await friendStatus(data.friends.toString()
       },
     });
     const data = await response.json();
-  console.log(data);
-  setFriendData(data)
+  setFriendData(data);
  }
 
 
@@ -60,7 +82,8 @@ await friendStatus(data.friends.toString()
     try {
       const base64 = await convertToBase64(e.target.files[0]);
       setFile(base64);
-      await userStatus(base64);
+     setImageUrl(base64)
+      await userStatus();
     } catch (error) {
       console.error('Error converting file to base64:', error);
     }
@@ -81,8 +104,8 @@ setFriendStatusImage(image);
 
 viewStatus?
 
-<div onClick={statusView} width="100%" height="100%" style={{display:'flex',alignItems:'center',justifyContent:"center" ,position:"absolute", backdropFilter: "blur(5px)",paddingTop:"200px",marginTop:"200px"}}>
-  <img src={friendStatusImage || friendStatusImg} alt="" height="75%" width="75%" style={{zIndex:1}} />
+<div onClick={statusView} width="100%" height="100%" style={{display:'flex',alignItems:'center',justifyContent:"center" ,position:"absolute", backdropFilter: "blur(5px)",paddingTop:"200px",marginTop:"50px"}}>
+  <img src={friendStatusImage || friendStatusImg} alt="" height="70%" width="70%" style={{zIndex:1}} />
   <img src={cancelIcon} alt="" />
 </div>
 
@@ -105,7 +128,7 @@ viewStatus?
               width="60px"
               height='60px'
               alt="status"
-              src={userData?.status}
+              src={ file ? file : userData?.status || status }
               title='Add status'
             />
           </label>
