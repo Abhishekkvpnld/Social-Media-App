@@ -22,7 +22,7 @@ import {
     const main = palette.neutral.main;
   
     const getUser = async () => {
-      const response = await fetch(`https://shareburst.onrender.com/users/${userId}`, {
+      const response = await fetch(`http://localhost:4000/users/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -32,7 +32,7 @@ import {
   
     useEffect(() => {
       getUser();
-    });
+    },[]);  // eslint-disable-line react-hooks/exhaustive-deps
   
     if (!user) {
       return null;

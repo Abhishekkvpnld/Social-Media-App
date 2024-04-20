@@ -15,7 +15,8 @@ const {
     friends,
     location,
     occupation
-} = req.body
+} = req.body;
+console.log(req.body);
 const salt = await bcrypt.genSalt();
 const hashedPassword = await bcrypt.hash(password,salt)
 
@@ -56,8 +57,10 @@ const isMatch = await bcrypt.compare(password,user.password);
 if(!isMatch)return res.status(400).json({msg:"Invalid Credential...!"})
 
 const token = Jwt.sign({id : user._id},process.env.JWT_SECRET);
-delete user.password
-res.status(200).json({token,user})
+delete user.password;
+
+res.status(200)
+.json({token,user,msg:"Logged In Successfully..."})
 
 }catch(err){
 res.status(500).json({error:err.message})

@@ -7,7 +7,7 @@ import friendStatusImg from "./vector-flat-illustration-grayscale-avatar-600nw-2
 import cancelIcon from "./icons8-cancel.svg"
 import convertToBase64 from "../../components/Convert";
 import { useSelector } from "react-redux";
-import axios from 'axios';
+
 
 
 function Status({ userId }) {
