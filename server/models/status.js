@@ -2,24 +2,19 @@ import mongoose, { Schema, Types } from "mongoose";
 
 const schema = new Schema({
 
-    statusImg: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-
-    userid: {
+    statusImg: {
+        type: String,
+        required: true
+    },
+    userId: {
         type: Types.ObjectId,
         required: true
     },
-    username:{
+    username: {
+        type: String,
+        required: true
+    },
+    imageURL:{
         type:String,
         required:true
     }
@@ -30,5 +25,5 @@ const schema = new Schema({
     }
 );
 
-const Status = mongoose.model("Message", schema);
+const Status = mongoose.model("status", schema);
 export default Status;

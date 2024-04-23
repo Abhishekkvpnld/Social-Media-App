@@ -1,57 +1,89 @@
 
 import User from "../models/user.js";
 import Status from "../models/status.js";
-import { uploadFilesToCloudinary } from "../data/cloudinary.js";
+
 
 export const userStatus = async (req, res) => {
     try {
 
         const userId = req.params.userId;
-        const files = req.files || [] ;
-        const body = req.body
+        const fileName = req.file.filename;
 
-        console.log("userId",userId);
-        console.log( 'files',files);
+        console.log("userId", userId);
+        console.log("filename", fileName);
 
-        // if (files.length < 1)
-        //     return res.status(400)
-        //         .json({ message: "Please Upload Status" });
-
-
-        // const [user, me] = await Promise.all([
-        //     User.findById(userId),
-        //     User.findById(userId, "name")
-        // ]);
-
-        // if (!user)
-        //     return res.status(404)
-        //         .json({ message: "User Not Found" });
+        if (!fileName)
+            return res.status(400)
+                .json({ message: "Please Upload Status" });
 
 
-        //Upload file here
-        // const attachments = await uploadFilesToCloudinary(files);
+        const user = await User.findById(userId, "firstName"); // fetching user details
 
-        // const messageForDB = {
-        //     statusImg: attachments,
-        //     userid: userId,
-        //     username: me,
+        if (!user)
+            return res.status(404)
+                .json({ message: "User Not Found" });
+
+        const imageURL = `${req.protocol}://${req.get('host')}/statusFile/${req.file.filename}`;
+
+        const messageForDB = {
+            statusImg: fileName,
+            userId: userId,
+            username: user.firstName,
+            imageURL
+        };
+        const existingStatus = await Status.findOneAndDelete({ userid: userId });
+
+        console.log(existingStatus);
+
+        // // if (existingStatus) {
+
+        //     // Create and save the new status
+        //     const newStatus = new Status({ userid: userId, messageForDB });
+        //     await newStatus.save();
+
+        // } else {
+
+        //     const status = await Status.create(messageForDB);
         // };
 
 
-        // const status = await Status.create(messageForDB);
 
         // res.status(200).json({
         //     success: true,
-        //     status
+        //     status,
+        //     message: "Status Added Successfully..."
         // });
 
 
     } catch (err) {
         console.error('Error updating user status:', err);
-        // res.status(500)
-        //     .json({ message: 'Internal server error' });
+        res.status(500)
+            .json({ message: 'Internal server error' });
+    };
+};
+
+
+
+export const getUserStatus = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        // Use findById to find status by user ID
+        const status = await Status.findById(userId);
+
+        if (!status) {
+            return res.status(404).json({ message: "Status not found" });
+        }
+
+        // Send status data if found
+        res.status(200).json({ status });
+    } catch (err) {
+        // Handle errors
+        console.error('Error fetching user status:', err);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 
 

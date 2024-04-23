@@ -1,10 +1,15 @@
 
 import multer from "multer";
 
-const multerUpload = multer({
-    limits:{
-        fileSize:1024*1024*5
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'statusFile/') //the destination folder where files will be saved
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname) // Specify the filename
     }
 });
 
-export const attachmentsMulter = multerUpload.array("files",1);
+const upload = multer({ storage: storage });
+
+export const attachmentsMulter = upload.single("files");
