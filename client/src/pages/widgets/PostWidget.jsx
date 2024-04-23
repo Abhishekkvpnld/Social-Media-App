@@ -56,9 +56,11 @@ const PostWidget = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
+
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
+
       {picturePath && (
         <img
           width="100%"
@@ -68,8 +70,11 @@ const PostWidget = ({
           src={`http://localhost:4000/assets/${picturePath}`}
         />
       )}
+      
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
+
+
           <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
               {isLiked ? (
@@ -81,18 +86,24 @@ const PostWidget = ({
             <Typography>{likeCount}</Typography>
           </FlexBetween>
 
+
           <FlexBetween gap="0.3rem">
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
             <Typography>{comments.length}</Typography>
           </FlexBetween>
+
         </FlexBetween>
+
 
         <IconButton>
           <ShareOutlined />
         </IconButton>
+
       </FlexBetween>
+
+
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
@@ -106,6 +117,7 @@ const PostWidget = ({
           <Divider />
         </Box>
       )}
+
     </WidgetWrapper>
   );
 };

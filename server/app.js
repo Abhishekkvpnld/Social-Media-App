@@ -15,6 +15,7 @@ import userRoute from "./routes/users.js";
 import postRoute from "./routes/post.js";
 import statusRoute from "./routes/status.js";
 import { verifyToken } from "./middlewares/verify.js";
+import { v2 as cloudinary } from "cloudinary";
 import User from "./models/user.js";
 import Post from "./models/post.js";
 import { users, posts } from "./data/index.js"
@@ -46,7 +47,16 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
-const upload = multer({ storage })
+const upload = multer({ storage });
+
+
+//Cloudinary Config
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 
 /* ROUTES */
 app.use("/auth", authRoute);

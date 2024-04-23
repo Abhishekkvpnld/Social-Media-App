@@ -48,7 +48,7 @@ const fullName = user ? `${user.firstName} ${user.lastName}` : "Account";
 fontWeight="bold"
 fontSize = "clamp(1rem,2rem,2.25rem)"
 color="primary"
-onclick={()=>navigate("/home")}
+onClick={()=>navigate("/home")}
 sx={{
   "&:hover":{
     color:primaryLight,

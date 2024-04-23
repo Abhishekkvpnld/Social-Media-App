@@ -1,4 +1,4 @@
-import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
+import { PersonAddOutlined as PersonAddOutlinedIcon, PersonRemoveOutlined as PersonRemoveOutlinedIcon } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `https://shareburst.onrender.com/users/${_id}/${friendId}`,
+      `http://localhost:4000/users/${_id}/${friendId}`,
       {
         method: "PUT",
         headers: {
@@ -66,14 +66,17 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
       </FlexBetween>
       <IconButton
         onClick={() => patchFriend()}
-        sx={{ backgroundColor: primaryLight, p: "0.6rem",zIndex:-1 }}
+        sx={{ backgroundColor: primaryLight, p: "0.6rem"}}
       >
+        
         {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          <PersonRemoveOutlinedIcon sx={{ color: primaryDark }} />
         ) : (
-          <PersonAddOutlined sx={{ color: primaryDark }} />
+          <PersonAddOutlinedIcon sx={{ color: primaryDark }} />
         )}
+
       </IconButton>
+      
     </FlexBetween>
   );
 };

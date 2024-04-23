@@ -5,7 +5,7 @@ try{
 
 let token = req.header("Authorization");
 if(!token){
-    return res.status(403).json({msg:"Aceess Denied"})
+    return res.status(403).json({msg:"Access Denied"})
 }
 
 if(token.startsWith("Bearer ")){
