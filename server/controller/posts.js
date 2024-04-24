@@ -34,7 +34,6 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPost = async (req, res) => {
     try {
-        console.log('getFeedPost');
         const post = await Post.find();
         res.status(200).json(post);
     } catch (err) {

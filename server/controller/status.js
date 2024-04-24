@@ -9,12 +9,10 @@ export const userStatus = async (req, res) => {
         const userId = req.params.userId;
         const fileName = req.file.filename;
 
-        console.log("userId", userId);
-        console.log("filename", fileName);
 
         if (!fileName)
             return res.status(400)
-                .json({ message: "Please Upload Status" });
+                .json({ message: "Please Select Image" });
 
 
         const user = await User.findById(userId, "firstName"); // fetching user details
@@ -23,7 +21,10 @@ export const userStatus = async (req, res) => {
             return res.status(404)
                 .json({ message: "User Not Found" });
 
-        const imageURL = `${req.protocol}://${req.get('host')}/statusFile/${req.file.filename}`;
+        // Find and delete the previous status document for the same userId
+        await Status.findOneAndDelete({ userId });
+
+        const imageURL = `${req.protocol}://${req.get('host')}/status/${req.file.filename}`;
 
         const messageForDB = {
             statusImg: fileName,
@@ -31,28 +32,14 @@ export const userStatus = async (req, res) => {
             username: user.firstName,
             imageURL
         };
-        const existingStatus = await Status.findOneAndDelete({ userid: userId });
 
-        console.log(existingStatus);
+        const status = await Status.create(messageForDB);
 
-        // // if (existingStatus) {
-
-        //     // Create and save the new status
-        //     const newStatus = new Status({ userid: userId, messageForDB });
-        //     await newStatus.save();
-
-        // } else {
-
-        //     const status = await Status.create(messageForDB);
-        // };
-
-
-
-        // res.status(200).json({
-        //     success: true,
-        //     status,
-        //     message: "Status Added Successfully..."
-        // });
+        res.status(200).json({
+            success: true,
+            status,
+            message: "Status Added Successfully..."
+        });
 
 
     } catch (err) {
@@ -69,20 +56,36 @@ export const getUserStatus = async (req, res) => {
 
     try {
         // Use findById to find status by user ID
-        const status = await Status.findById(userId);
+        const status = await Status.find({ userId }).sort({ createdAt: -1 }).limit(1);
 
         if (!status) {
-            return res.status(404).json({ message: "Status not found" });
+            return res.status(404).json({ message: "Add Status" });
         }
 
         // Send status data if found
-        res.status(200).json({ status });
+        res.status(200).json(status[0]);
     } catch (err) {
         // Handle errors
         console.error('Error fetching user status:', err);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
+export const deleteStatus = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        await Status.findOneAndDelete({ userId });
+        // Send status data if found
+        res.status(200).json({ message: "Status Deleted..." });
+    } catch (err) {
+        // Handle errors
+        console.error('Error fetching user status:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 
 
 

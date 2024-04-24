@@ -23,18 +23,19 @@ import { users, posts } from "./data/index.js"
 
 /*CONFIGURATION */
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-dotenv.config()
-const app = express()
-app.use(express.json())
-app.use(helmet())
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
-app.use(morgan("dev"))
-app.use(bodyParser.json({ limit: "50mb", extended: true }))
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
-app.use(cors())
-app.use("/assets", express.static(path.join(__dirname, 'public/assets')))
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config();
+const app = express();
+app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(morgan("dev"));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(cors());
+app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
+app.use("/status", express.static(path.join(__dirname, 'public/status')))
 
 
 
@@ -48,14 +49,6 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage });
-
-
-//Cloudinary Config
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
 
 /* ROUTES */
