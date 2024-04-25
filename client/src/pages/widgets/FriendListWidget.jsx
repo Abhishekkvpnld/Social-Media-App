@@ -4,6 +4,7 @@ import WidgetWrapper from "../../components/WidgetWrapper";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../../states/state";
+import { BACKEND_URL } from "variable";
 
 const FriendListWidget = ({ userId }) => {
 
@@ -14,7 +15,7 @@ const FriendListWidget = ({ userId }) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:4000/users/${userId}/friends`,
+      `${BACKEND_URL}/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -39,9 +40,9 @@ const FriendListWidget = ({ userId }) => {
         Friends List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        { friends?.map((friend) => (
+        { friends?.map((friend,index) => (
           <Friend
-            key={friend._id}
+            key={index}
             friendId={friend._id}
             name={`${friend.firstName} ${friend.lastName}`}
             subtitle={friend.occupation}

@@ -24,6 +24,7 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "../../states/state";
+import { BACKEND_URL } from "variable";
 // import Status from "./Status";
   
   const MyPostWidget = ({ picturePath }) => {
@@ -47,7 +48,7 @@ import {
         formData.append("picturePath", image.name);
       }
   
-      const response = await fetch(`http://localhost:4000/posts`, {
+      const response = await fetch(`${BACKEND_URL}/posts`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -72,7 +73,6 @@ import {
               backgroundColor: palette.neutral.light,
               borderRadius: "2rem",
               padding: "1rem 2rem",
-              zIndex:-1
             }}
           />
         </FlexBetween>
@@ -170,7 +170,6 @@ import {
               color:palette.background.black,
               backgroundColor: palette.background.green,
               borderRadius: "3rem",
-              zIndex:-1
             }}
           >
             POST

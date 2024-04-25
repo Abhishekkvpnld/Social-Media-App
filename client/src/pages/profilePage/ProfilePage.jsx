@@ -9,6 +9,7 @@ import PostsWidget from "../widgets/PostsWidget";
 import UserWidget from "../widgets/UserWidget";
 
 import UserStatus from "pages/widgets/UserStatus";
+import { BACKEND_URL } from "variable";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:4000/users/${userId}`, {
+    const response = await fetch(`${BACKEND_URL}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

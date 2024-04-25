@@ -1,9 +1,16 @@
 
 import User from "../models/user.js";
 import Status from "../models/status.js";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
+
 
 
 export const userStatus = async (req, res) => {
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     try {
 
         const userId = req.params.userId;
@@ -21,8 +28,23 @@ export const userStatus = async (req, res) => {
             return res.status(404)
                 .json({ message: "User Not Found" });
 
-        // Find and delete the previous status document for the same userId
-        await Status.findOneAndDelete({ userId });
+
+        const prevStatus = await Status.findOne({ userId });
+
+        // If previous status exists, delete its image file
+        if (prevStatus) {
+            const prevFileName = prevStatus.statusImg;
+            const prevImagePath = `${__dirname}/public/status/${prevFileName}`;
+
+            // Check if the file exists before attempting to delete
+            if (fs.existsSync(prevImagePath)) {
+                fs.unlinkSync(prevImagePath);
+            }
+
+            // Find and delete the previous status document for the same userId
+            await Status.findOneAndDelete({ userId });
+        };
+
 
         const imageURL = `${req.protocol}://${req.get('host')}/status/${req.file.filename}`;
 
@@ -88,22 +110,23 @@ export const deleteStatus = async (req, res) => {
 
 
 
+export const firendStatus = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const userData = await User.findById(userId)
+        const fetchFriendData = await Promise.all(userData?.friends?.map(async (friend) => {
+            if (friend) {
+                const fetchData = await Status.find({userId:friend});
+                return fetchData;
+            }
+        }));
+        const friendStatusData = fetchFriendData.reduce((acc, curr) => acc.concat(curr), []).filter(Boolean);
 
+        res.status(200)
+        .json(friendStatusData); // Filter out any null or undefined values
 
-// export const firendStatus = async (req, res) => {
-//     try {
-//         const userId = req.params.userId;
-//         const userData = await User.findById(userId)
-//         const friendData = await Promise.all(userData.friends?.map(async (friend) => {
-//             if (friend) {
-//                 const fetchData = await User.findById(friend);
-//                 return fetchData;
-//             }
-//         }));
-//         res.status(200).json(friendData.filter(Boolean)); // Filter out any null or undefined values
-
-//     } catch (err) {
-//         console.error('Error fetching friend data:', err);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// }
+    } catch (err) {
+        console.error('Error fetching friend data:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};

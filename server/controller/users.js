@@ -20,7 +20,7 @@ let {id} = req.params;
 const user = await User.findById(id);
 
 const friends = await Promise.all(               
-    user.friends.map((id)=>User.findById(id)) 
+    user?.friends?.map((id)=>User.findById(id)) 
     );
 
     const formattedFriends = friends.map(({_id,firstName,lastName,occupation,location,picturePath})=>{

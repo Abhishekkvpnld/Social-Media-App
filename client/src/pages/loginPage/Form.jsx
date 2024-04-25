@@ -3,7 +3,7 @@ import {
   Box,
   Button,
   TextField,
-  useMediaQuery, 
+  useMediaQuery,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -15,6 +15,8 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../states/state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import { BACKEND_URL } from "../../variable"
+import toast from "react-hot-toast";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -64,7 +66,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "http://localhost:4000/auth/register",
+      `${BACKEND_URL}/auth/register`,
       {
         method: "POST",
         body: formData,
@@ -72,19 +74,20 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-
+    toast.success(savedUser.message)
     if (savedUser) {
       setPageType("login");
     }
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:4000/auth/login", {
+    const loggedInResponse = await fetch(`${BACKEND_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    toast.success(loggedIn.message)
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(

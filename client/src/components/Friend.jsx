@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "../states/state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+import { BACKEND_URL } from "variable";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  const friends = useSelector((state) => state.user?.friends) || [];
 
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
@@ -19,11 +22,11 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
 
-  const isFriend = friends.find((friend) => friend._id === friendId);
+  const isFriend = friends && friends.find((friend) => friend._id === friendId);
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:4000/users/${_id}/${friendId}`,
+      `${BACKEND_URL}/users/${_id}/${friendId}`,
       {
         method: "PUT",
         headers: {
@@ -52,7 +55,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             fontWeight="500"
             sx={{
               "&:hover": {
-                color: palette.primary.light,
+                color: "green",
                 cursor: "pointer",
               },
             }}

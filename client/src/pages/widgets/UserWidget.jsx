@@ -11,6 +11,7 @@ import {
   import { useSelector } from "react-redux";
   import { useEffect, useState } from "react";
   import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "variable";
   
   const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
@@ -22,7 +23,7 @@ import {
     const main = palette.neutral.main;
   
     const getUser = async () => {
-      const response = await fetch(`http://localhost:4000/users/${userId}`, {
+      const response = await fetch(`${BACKEND_URL}/users/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -65,14 +66,14 @@ import {
                 fontWeight="500"
                 sx={{
                   "&:hover": {
-                    color: palette.primary.light,
+                    color: "blue",
                     cursor: "pointer",
                   },
                 }}
               >
                 {firstName} {lastName}
               </Typography>
-              <Typography color={medium}>{friends.length} friends</Typography>
+              <Typography color={medium}>{friends?.length} friends</Typography>
             </Box>
           </FlexBetween>
           <ManageAccountsOutlined />

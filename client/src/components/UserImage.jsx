@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { BACKEND_URL } from "variable";
 
 const UserImage = ({ image, size = "60px" }) => {
   return (
@@ -8,7 +9,7 @@ const UserImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`http://localhost:4000/assets/${image}`}
+        src={`${BACKEND_URL}/assets/${image}`}
       />
     </Box>
   );
