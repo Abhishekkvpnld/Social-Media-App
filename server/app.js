@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
-})
+});
 const upload = multer({ storage });
 
 
@@ -67,12 +67,13 @@ app.get("/", (req, res) => {
 
 /* MONGODB CONNECTION */
 const PORT = process.env.PORT || 4000
-mongoose.connect(process.env.MONGO_LOCAL_URL, {
+const URL = process.env.MONGO_ATLAS_URL || "mongodb+srv://abhishekkvpnld:ZNTEimPqbyLfS7p3@cluster0.jzfez0b.mongodb.net"
+mongoose.connect(URL, {
     // useNewUrlParse :true,
     // useUnifiedTopology : true 
 }).then(() => {
     console.log('DB Connection successfull');
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
         console.log(`server connected on Port ${PORT}`)
     })
 
