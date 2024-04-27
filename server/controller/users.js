@@ -10,9 +10,8 @@ res.status(200).json(user);
 }catch(err){
     res.status(404).json({message:err.message})
 }
-}
-
-
+};
+/* GET */
 export const getUserFriends = async(req,res)=>{
 try{
 
@@ -32,9 +31,7 @@ res.status(200).json(formattedFriends);
 }catch(err){
     res.status(404).json({message: err.message})
 }
-}
-
-
+};
 /* UPDATE */
 export const addRemoveFriend = async (req, res) => {
     try {

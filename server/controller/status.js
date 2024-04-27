@@ -71,8 +71,6 @@ export const userStatus = async (req, res) => {
     };
 };
 
-
-
 export const getUserStatus = async (req, res) => {
     const userId = req.params.userId;
 
@@ -93,7 +91,6 @@ export const getUserStatus = async (req, res) => {
     }
 };
 
-
 export const deleteStatus = async (req, res) => {
     const userId = req.params.userId;
 
@@ -107,8 +104,6 @@ export const deleteStatus = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
-
 
 export const firendStatus = async (req, res) => {
     try {

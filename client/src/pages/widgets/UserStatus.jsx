@@ -38,7 +38,7 @@ function UserStatus({ userId }) { // Destructure userId from props
             setUserData(data); // Set userData to the entire response data
         } catch (error) {
             console.error('Error fetching user status:', error);
-        }
+        };
     };
 
 
@@ -49,6 +49,7 @@ function UserStatus({ userId }) { // Destructure userId from props
         formData.append('files', selectedFile);
 
         try {
+            const statusLoader = toast.loading("Uploading...")
             const response = await fetch(`${BACKEND_URL}/status/${userId}`, {
                 method: "POST",
                 headers: {
@@ -58,10 +59,12 @@ function UserStatus({ userId }) { // Destructure userId from props
             });
             const data = await response.json();
             setUserData(data);
+            toast.dismiss(statusLoader);
             toast.success(data?.message);
         } catch (error) {
+            toast.error(error)
             console.error('Error uploading file:', error);
-        }
+        };
     };
 
 
@@ -69,6 +72,7 @@ function UserStatus({ userId }) { // Destructure userId from props
     const onDelete = async () => {
 
         try {
+            const statusDeleteLoader = toast.loading("Deleting...")
             const response = await fetch(`${BACKEND_URL}/status/${userId}`, {
                 method: "DELETE",
                 headers: {
@@ -76,6 +80,7 @@ function UserStatus({ userId }) { // Destructure userId from props
                 },
             });
             const data = await response.json();
+            toast.dismiss(statusDeleteLoader);
             toast.success(data?.message, { duration: 4000, position: 'top-right' });
         } catch (error) {
             console.error('Error uploading file:', error);
@@ -108,7 +113,7 @@ function UserStatus({ userId }) { // Destructure userId from props
                     <Button onClick={onDelete} sx={{ margin: "5px", border: "1px solid red" }} color='error'>Delete</Button>
                 </form>
             </Box>
-            <img width={"100%"} height={"100%"} src={imageURL} alt=''/> 
+            <img width={"100%"} height={"100%"} src={imageURL} alt='' />
         </div>
     )
 };

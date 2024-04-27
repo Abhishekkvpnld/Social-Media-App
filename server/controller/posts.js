@@ -1,7 +1,7 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
 
-
+/* POST */
 export const createPost = async (req, res) => {
     try {
 
@@ -28,9 +28,7 @@ export const createPost = async (req, res) => {
         res.status(409)
             .json({ message: err.message })
     }
-}
-
-
+};
 /* READ */
 export const getFeedPost = async (req, res) => {
     try {
@@ -41,8 +39,8 @@ export const getFeedPost = async (req, res) => {
         res.status(404)
             .json({ message: err.message });
     }
-}
-
+};
+/* GET */
 export const getUserPost = async (req, res) => {
     try {
         console.log("getUserPost")
@@ -54,8 +52,7 @@ export const getUserPost = async (req, res) => {
         res.status(404)
             .json({ message: err.message });
     }
-}
-
+};
 /* UPDATE */
 export const likePost = async (req, res) => {
     try {
@@ -85,4 +82,4 @@ export const likePost = async (req, res) => {
         res.status(404)
             .json({ message: err.message });
     }
-}
+};
