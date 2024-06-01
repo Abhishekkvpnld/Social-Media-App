@@ -89,7 +89,7 @@ const Form = () => {
   const login = async (values, onSubmitProps) => {
 
     try {
-     const registerId = toast.loading('Logging in...')
+      const registerId = toast.loading('Logging in...')
       const loggedInResponse = await fetch(`${BACKEND_URL}/auth/login`, {  // LogIn
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -248,6 +248,10 @@ const Form = () => {
               sx={{ gridColumn: "span 4" }}
             />
           </Box>
+          <h4 style={{ display: "flex", alignItems: 'center', justifyContent: "center" }}>
+            Demo User Email : <span style={{ color: "blue", margin: "5px" }}>user@gmail.com</span>
+            Password : <span style={{ color: "blue", margin: "5px" }}>User@123</span>
+          </h4>
 
           {/* BUTTONS */}
           <Box>
