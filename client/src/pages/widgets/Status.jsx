@@ -20,6 +20,8 @@ function Status({ userId }) {
   const [friendStatusImage, setFriendStatusImage] = useState('');
   const [imageURL, setImageURL] = useState(null);
 
+  console.log(friendData)
+
 
   useEffect(() => {
     friendStatus();
@@ -113,7 +115,7 @@ function Status({ userId }) {
               height='60px'
               alt="status"
               src={friend?.imageURL || friendStatusImg}
-              title={friend.firstName}
+              title={friend.username}
             />
 
           ))}
