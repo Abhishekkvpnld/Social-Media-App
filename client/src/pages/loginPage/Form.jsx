@@ -57,11 +57,15 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
+
+
   const register = async (values, onSubmitProps) => {
     try {
       const loadingToastId = toast.loading('Registering user...');
+
       // this allows us to send form info with image
       const formData = new FormData();
+
       for (let value in values) {
         formData.append(value, values[value]);
       }
@@ -86,7 +90,10 @@ const Form = () => {
     };
   };
 
-  const login = async (values, onSubmitProps) => {
+
+
+
+  const login = async (values, onSubmitProps) => {     // LogIn
 
     try {
       const registerId = toast.loading('Logging in...')
@@ -96,9 +103,11 @@ const Form = () => {
         body: JSON.stringify(values),
       });
       const loggedIn = await loggedInResponse.json();
+
       toast.dismiss(registerId);
-      toast.success(loggedIn.message)
+      toast.success(loggedIn.message);
       onSubmitProps.resetForm();
+
       if (loggedIn) {
         dispatch(
           setLogin({
@@ -108,6 +117,7 @@ const Form = () => {
         );
         navigate("/home");
       }
+
     } catch (error) {
       toast.error("Login Failed")
     };

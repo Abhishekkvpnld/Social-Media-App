@@ -29,6 +29,9 @@ export const createPost = async (req, res) => {
             .json({ message: err.message })
     }
 };
+
+
+
 /* READ */
 export const getFeedPost = async (req, res) => {
     try {
@@ -40,6 +43,9 @@ export const getFeedPost = async (req, res) => {
             .json({ message: err.message });
     }
 };
+
+
+
 /* GET */
 export const getUserPost = async (req, res) => {
     try {
@@ -53,6 +59,9 @@ export const getUserPost = async (req, res) => {
             .json({ message: err.message });
     }
 };
+
+
+
 /* UPDATE */
 export const likePost = async (req, res) => {
     try {
@@ -74,8 +83,7 @@ export const likePost = async (req, res) => {
             { likes: post.likes },
             { new: true }
         );
-        res.status(200)
-            .json(updatedPost);
+        res.status(200).json(updatedPost);
 
     } catch (err) {
 

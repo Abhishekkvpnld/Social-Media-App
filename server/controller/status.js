@@ -71,6 +71,8 @@ export const userStatus = async (req, res) => {
     };
 };
 
+
+
 export const getUserStatus = async (req, res) => {
     const userId = req.params.userId;
 
@@ -91,6 +93,8 @@ export const getUserStatus = async (req, res) => {
     }
 };
 
+
+
 export const deleteStatus = async (req, res) => {
     const userId = req.params.userId;
 
@@ -105,6 +109,8 @@ export const deleteStatus = async (req, res) => {
     }
 };
 
+
+
 export const firendStatus = async (req, res) => {
     try {
         const userId = req.params.userId;
@@ -117,8 +123,7 @@ export const firendStatus = async (req, res) => {
         }));
         const friendStatusData = fetchFriendData.reduce((acc, curr) => acc.concat(curr), []).filter(Boolean);
 
-        res.status(200)
-        .json(friendStatusData); // Filter out any null or undefined values
+        res.status(200).json(friendStatusData); // Filter out any null or undefined values
 
     } catch (err) {
         console.error('Error fetching friend data:', err);
