@@ -97,12 +97,15 @@ const Form = () => {
 
     try {
       const registerId = toast.loading('Logging in...')
+
       const loggedInResponse = await fetch(`${BACKEND_URL}/auth/login`, {  // LogIn
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
+
       const loggedIn = await loggedInResponse.json();
+
 
       toast.dismiss(registerId);
       toast.success(loggedIn.message);

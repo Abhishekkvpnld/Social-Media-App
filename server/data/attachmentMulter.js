@@ -3,10 +3,10 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/status") //the destination folder where files will be saved
+        cb(null, "public/assets") //the destination folder where files will be saved
     },
     filename: function (req, file, cb) {
-        cb(null,file.originalname) // Specify the filename
+        cb(null, file.originalname) // Specify the filename
     }
 });
 

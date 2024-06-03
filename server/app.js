@@ -33,9 +33,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors());
+app.use(cors({origin:"https://socio-burst.netlify.app"}));
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
-app.use("/status", express.static(path.join(__dirname, 'public/status')))
 
 
 
