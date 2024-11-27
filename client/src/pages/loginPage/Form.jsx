@@ -44,8 +44,8 @@ const initialValuesRegister = {
 };
 
 const initialValuesLogin = {
-  email: "",
-  password: "",
+  email: "user@gmail.com",
+  password: "User@123",
 };
 
 const Form = () => {
@@ -89,9 +89,6 @@ const Form = () => {
       toast.error('Registration failed. Please try again later.')
     };
   };
-
-
-
 
   const login = async (values, onSubmitProps) => {     // LogIn
 
